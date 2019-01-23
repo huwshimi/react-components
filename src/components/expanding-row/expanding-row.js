@@ -17,6 +17,7 @@ class ExpandingRow extends React.Component {
         opacity: 0
       }
     };
+    this.innerRef = React.createRef();
   }
 
   componentDidMount() {
@@ -30,7 +31,7 @@ class ExpandingRow extends React.Component {
     this.observer = new MutationObserver(mutations => {
       this._resize();
     });
-    this.observer.observe(this.refs.inner, {childList: true, subtree: true});
+    this.observer.observe(this.innerRef.current, {childList: true, subtree: true});
   }
 
   componentWillReceiveProps(nextProps, nextState) {
@@ -71,7 +72,7 @@ class ExpandingRow extends React.Component {
     const expanded = this.state.expanded;
     this.setState({
       styles: {
-        height: expanded ? this.refs.inner.offsetHeight + 'px' : '0px',
+        height: expanded ? this.innerRef.current.offsetHeight + 'px' : '0px',
         opacity: expanded ? 1 : 0
       }
     });
@@ -88,7 +89,7 @@ class ExpandingRow extends React.Component {
           {this.props.children[0]}
         </div>
         <div className="expanding-row__expanded twelve-col" style={this.state.styles}>
-          <div className="twelve-col no-margin-bottom" ref="inner">
+          <div className="twelve-col no-margin-bottom" ref={this.innerRef}>
             {this.props.children[1]}
           </div>
         </div>

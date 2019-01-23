@@ -34,8 +34,8 @@ describe('Terminal', () => {
       {disableLifeCycleMethods: true}
     );
     const instance = wrapper.instance();
-    instance.refs = {
-      terminal: {
+    instance.terminalRef = {
+      current: {
         querySelector: sinon.stub().returns({focus: sinon.stub()})
       }
     };
@@ -184,8 +184,8 @@ describe('Terminal', () => {
     wrapper = renderComponent();
     const instance = wrapper.instance();
     const textarea = {focus: sinon.stub().withArgs()};
-    instance.refs = {
-      terminal: {
+    instance.terminalRef = {
+      current: {
         querySelector: sinon
           .stub()
           .withArgs('textarea')

@@ -24,7 +24,7 @@ describe('ExpandingRow', () => {
     );
     const instance = wrapper.instance();
     // Mock the ref. The MutationObserver needs a real DOM node.
-    instance.refs = {inner: document.createElement('div')};
+    instance.innerRef = {current: document.createElement('div')};
     instance.componentDidMount();
     wrapper.update();
     return wrapper;
@@ -41,7 +41,7 @@ describe('ExpandingRow', () => {
     const wrapper = renderComponent();
     const instance = wrapper.instance();
     // Mock the ref.
-    instance.refs = {inner: {offsetHeight: 10}};
+    instance.innerRef = {current: {offsetHeight: 10}};
     wrapper.simulate('click');
     wrapper.update();
     assert.equal(wrapper.prop('className').includes('expanding-row--expanded'), true);

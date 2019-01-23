@@ -1,6 +1,6 @@
 {
   "name": "@canonical/juju-react-components",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "description": "React components for use with Juju",
   "main": "lib/index.js",
   "source": true,

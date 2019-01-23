@@ -20,8 +20,8 @@ describe('PanelComponent', function() {
       {disableLifecycleMethods: true}
     );
     const instance = wrapper.instance();
-    instance.refs = {
-      content: {
+    instance.contentRef = {
+      current: {
         focus: sinon.stub()
       }
     };
@@ -60,12 +60,12 @@ describe('PanelComponent', function() {
   it('sets the keyboard focus when it loads', function() {
     const wrapper = renderComponent();
     const instance = wrapper.instance();
-    assert.equal(instance.refs.content.focus.callCount, 1);
+    assert.equal(instance.contentRef.current.focus.callCount, 1);
   });
 
   it('can not set the keyboard focus on load', function() {
     const wrapper = renderComponent({focus: false});
     const instance = wrapper.instance();
-    assert.equal(instance.refs.content.focus.callCount, 0);
+    assert.equal(instance.contentRef.current.focus.callCount, 0);
   });
 });

@@ -30,6 +30,7 @@ class Terminal extends React.Component {
       // of the terminal.
       terminalSize: null
     };
+    this.terminalRef = React.createRef();
     this.term = null;
     this.ws = null;
     this.terminalSetup;
@@ -55,7 +56,7 @@ class Terminal extends React.Component {
     });
     term.writeln('connecting (this operation could take a minute)... ');
     this.term = term;
-    term.loadWebfontAndOpen(this.refs.terminal, true);
+    term.loadWebfontAndOpen(this.terminalRef.current, true);
     const ws = new props.WebSocket(props.address);
     this.ws = ws;
     const creds = props.creds;
@@ -226,7 +227,7 @@ class Terminal extends React.Component {
     Set the focus back to the terminal so that users can keep typing.
   */
   focus() {
-    const textarea = this.refs.terminal.querySelector('.xterm-helper-textarea');
+    const textarea = this.terminalRef.current.querySelector('.xterm-helper-textarea');
     textarea.focus();
   }
 
@@ -255,7 +256,7 @@ class Terminal extends React.Component {
             </span>
           </div>
         </div>
-        <div className={terminalClassNames} ref="terminal" style={styles} />
+        <div className={terminalClassNames} ref={this.terminalRef} style={styles} />
       </div>
     );
   }

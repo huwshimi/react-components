@@ -8,11 +8,16 @@ const React = require('react');
 require('./_panel.scss');
 
 class Panel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.contentRef = React.createRef();
+  }
+
   componentDidMount() {
     // Set the keyboard focus on the component so it can be scrolled with the
     // keyboard. Requires tabIndex to be set on the element.
     if (this.props.focus) {
-      this.refs.content.focus();
+      this.contentRef.current.focus();
     }
   }
 
@@ -59,7 +64,7 @@ class Panel extends React.Component {
       <div
         className={this._genClasses()}
         onClick={this._handleClick.bind(this)}
-        ref="content"
+        ref={this.contentRef}
         tabIndex="0"
       >
         <div className="panel-component__inner" onClick={this._stopBubble.bind(this)}>
