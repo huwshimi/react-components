@@ -1,0 +1,109 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs/blocks";
+
+import DoubleRow from "./DoubleRow";
+import ModularTable from "../ModularTable";
+import Icon, { ICONS } from "../Icon";
+
+<Meta
+  title="DoubleRow"
+  component={DoubleRow}
+  argTypes={{
+    children: {
+      control: {
+        type: "text",
+      },
+    },
+  }}
+/>
+
+export const Template = (args) => <DoubleRow {...args} />;
+
+### DoubleRow
+
+This is a double content row for use in tables.
+
+### Props
+
+<ArgsTable of={DoubleRow} />
+
+### DoubleRow
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{ primary: "eth0", secondary: "0d:be:38:1d:1c:a9" }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+See [Col](/#/Col) for grid details.
+
+### Props
+
+<ArgsTable of={DoubleRow} />
+
+### With ModularTable
+
+<Preview>
+  <Story name="With ModularTable">
+    <ModularTable
+      columns={React.useMemo(
+        () => [
+          {
+            Header: "ID",
+            accessor: "build",
+            Cell: ({ value }) => (
+              <DoubleRow
+                iconSpace
+                icon={
+                  (value.result === "released" && (
+                    <Icon name={ICONS.success} />
+                  )) ||
+                  (value.result === "failed" && (
+                    <Icon name={ICONS.error} />
+                  )) || <Icon name="" />
+                }
+                primary={value.buildId}
+                secondary={value.duration}
+              />
+            ),
+          },
+        ],
+        []
+      )}
+      data={React.useMemo(
+        () => [
+          {
+            build: {
+              buildId: "5432",
+              arch: "arm64",
+              duration: "5 minutes",
+              result: "released",
+              finished: "10 minutes ago",
+            },
+          },
+          {
+            build: {
+              buildId: "1234",
+              arch: "armhf",
+              duration: "5 minutes",
+              result: "failed",
+              finished: "over 1 year ago",
+            },
+          },
+          {
+            build: {
+              buildId: "1111",
+              arch: "test64",
+              duration: "1 minute",
+              result: "other",
+              finished: "ages ago",
+            },
+          },
+        ],
+        []
+      )}
+    />
+  </Story>
+</Preview>

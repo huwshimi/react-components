@@ -1,0 +1,36 @@
+import { ArgsTable, Canvas, Meta, Story } from "@storybook/addon-docs/blocks";
+
+import TableMenu from "./TableMenu";
+
+<Meta
+  title="TableMenu"
+  component={TableMenu}
+  argTypes={{
+    children: {
+      control: {
+        type: "text",
+      },
+    },
+  }}
+/>
+
+export const Template = (args) => <TableMenu {...args} />;
+
+### TableMenu
+
+This is a double content row for use in tables.
+
+### Props
+
+<ArgsTable of={TableMenu} />
+
+### TableMenu
+
+<Canvas>
+  <Story
+    name="Default"
+    args={{ primary: "eth0", secondary: "0d:be:38:1d:1c:a9" }}
+  >
+    {Template.bind({})}
+  </Story>
+</Canvas>
