@@ -166,14 +166,13 @@ const Pagination = ({
           disabled={currentPage === 1}
           onClick={() => changePage(currentPage - 1)}
         />
-
         {generatePaginationItems(
           pageNumbers,
           currentPage,
           truncateThreshold,
           changePage
         )}
-
+        hello
         <PaginationButton
           key="forward"
           direction="forward"
